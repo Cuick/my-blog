@@ -1,3 +1,20 @@
 baseurl = "http://cuick.github.io"
 languageCode = "en-us"
-title = "崔程凯"
+
+[params]
+  sidebartitle = "崔程凯"
+  # sidebartagline = "Is super awesome"
+  sidebartagline = "Do not cut down the tree that gives you shade."
+  # sidebarphoto = "/abc.jpg"
+[[menu.main]]
+    # 页面左侧的目录
+    name = "MENU"
+    url = "/menu"
+[[menu.social]]
+    pre = "<i class='fa fa-twitter'></i>"
+    url = "http://blog.csdn.net/cuick2013"
+    identifier = "twitter"
+[[menu.footer]]
+    # 页脚
+    # name = "notes"
+    # url = "/notes"
