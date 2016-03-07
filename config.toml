@@ -14,7 +14,7 @@ languageCode = "en-us"
     pre = "<i class='fa fa-twitter'></i>"
     url = "http://blog.csdn.net/cuick2013"
     identifier = "twitter"
-[[menu.footer]]
+#[[menu.footer]]
     # 页脚
     # name = "notes"
     # url = "/notes"
