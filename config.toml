@@ -1,11 +1,20 @@
 baseurl = "http://cuick.github.io"
+theme = "hugo-redlounge"
+title = "K's blog!"
+# disqusShortname = "normal"
+lightbox = true
+
+ignoreFiles = [ "\\.foo$", "\\.boo$" ]
+sitemap = false
 languageCode = "en-us"
+footnoteAnchorPrefix = "1111111111111111"
+footnoteReturnLinkContents = "1111111111111111"
 
 [params]
-  sidebartitle = "崔程凯"
-  # sidebartagline = "Is super awesome"
-  sidebartagline = "Do not cut down the tree that gives you shade."
-  # sidebarphoto = "/abc.jpg"
+    sidebartitle = "崔程凯"
+    sidebartagline = "Do not cut down the tree that gives you shade."
+    # sidebarphoto = "/abc.jpg"
+    author = "Nikola Tesla"
 [[menu.main]]
     # 页面左侧的目录
     name = "MENU"
@@ -14,7 +23,7 @@ languageCode = "en-us"
     pre = "<i class='fa fa-twitter'></i>"
     url = "http://blog.csdn.net/cuick2013"
     identifier = "twitter"
-#[[menu.footer]]
+[[menu.footer]]
     # 页脚
-    # name = "notes"
-    # url = "/notes"
+    name = "notes"
+    url = "/notes"
