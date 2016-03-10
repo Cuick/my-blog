@@ -1,7 +1,8 @@
 baseurl = "http://cuick.github.io"
 theme = "hugo-redlounge"
 title = "K's blog!"
-# disqusShortname = "normal"
+disqusShortname = "kooooook"
+
 lightbox = true
 
 ignoreFiles = [ "\\.foo$", "\\.boo$" ]
@@ -14,16 +15,56 @@ footnoteReturnLinkContents = "1111111111111111"
     sidebartitle = "崔程凯"
     sidebartagline = "Do not cut down the tree that gives you shade."
     # sidebarphoto = "/abc.jpg"
-    author = "Nikola Tesla"
+    author = "Kook"
+
+    description = "code by Nate Finch"
+    twitter = "https://twitter.com/natethefinch"
+    gplus = "https://plus.google.com/+NateFinch"
+    disqus = "npfio"
+[[menu.main]]
+    # 页面左侧的目录
+    name = "NOTES"
+    url = "/notes"
 [[menu.main]]
     # 页面左侧的目录
     name = "MENU"
     url = "/menu"
+[[menu.main]]
+    # 页面左侧的目录
+    name = "twisted"
+    url = "/twisted"
+[[menu.main]]
+    # 页面左侧的目录
+    name = "hugo"
+    url = "/hugo"
 [[menu.social]]
-    pre = "<i class='fa fa-twitter'></i>"
+    pre = "<i class='fa fa-link'></i>"
     url = "http://blog.csdn.net/cuick2013"
-    identifier = "twitter"
+    identifier = "c_csdn"
+[[menu.social]]
+    pre = "<i class='fa fa-github'></i>"
+    url = "http://github.com/cuick"
+    identifier = "b_github"
+[[menu.social]]
+    pre = "<i class='fa fa-weibo'></i>"
+    url = "http://weibo.com/zxzxck/"
+    identifier = "a_weibo"
+
+# [[menu.social]]
+# pre = "<i class='fa fa-google'></i>"
+# url = "https://plus.google.com/+NateFinch"
+# identifier = "gplus"
+
+# [[menu.social]]
+# pre = "<i class='fa fa-twitter'></i>"
+# url = "http://blog.csdn.net/cuick2013"
+# identifier = "twitter"
 [[menu.footer]]
     # 页脚
     name = "notes"
     url = "/notes"
+
+[taxonomies]
+    category = "categories"
+    tag = "tags"
+    series = "series"

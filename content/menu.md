@@ -3,6 +3,7 @@ date = "1970-01-01T00:00:01+08:00"
 title = "MENU"
 weight = 999
 # tags = [ "Markdown", "编程语言", "Hugo", "command" , "标记语言"]
+series = [ "menu menu menu" ]
 categories = [
   "Hugo",
   "Markdown",
