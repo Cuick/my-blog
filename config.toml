@@ -23,42 +23,33 @@ footnoteReturnLinkContents = "1111111111111111"
     disqus = "npfio"
 [[menu.main]]
     # 页面左侧的目录
-    name = "NOTES"
-    url = "/notes"
-[[menu.main]]
-    # 页面左侧的目录
-    name = "MENU"
-    url = "/menu"
-[[menu.main]]
-    # 页面左侧的目录
     name = "twisted"
     url = "/twisted"
 [[menu.main]]
     # 页面左侧的目录
     name = "hugo"
     url = "/hugo"
-[[menu.social]]
-    pre = "<i class='fa fa-link'></i>"
-    url = "http://blog.csdn.net/cuick2013"
-    identifier = "c_csdn"
+[[menu.main]]
+    # 页面左侧的目录
+    name = "Markdown"
+    url = "/markdown"
+# [[menu.social]]
+#   pre = "<i class='fa fa-link'></i>"
+#   url = "http://blog.csdn.net/cuick2013"
+#   identifier = "c_csdn"
 [[menu.social]]
     pre = "<i class='fa fa-github'></i>"
     url = "http://github.com/cuick"
     identifier = "b_github"
-[[menu.social]]
-    pre = "<i class='fa fa-weibo'></i>"
-    url = "http://weibo.com/zxzxck/"
-    identifier = "a_weibo"
-
+# [[menu.social]]
+#    pre = "<i class='fa fa-weibo'></i>"
+#    url = "http://weibo.com/zxzxck/"
+#    identifier = "a_weibo"
 # [[menu.social]]
 # pre = "<i class='fa fa-google'></i>"
 # url = "https://plus.google.com/+NateFinch"
 # identifier = "gplus"
 
-# [[menu.social]]
-# pre = "<i class='fa fa-twitter'></i>"
-# url = "http://blog.csdn.net/cuick2013"
-# identifier = "twitter"
 [[menu.footer]]
     # 页脚
     name = "notes"
