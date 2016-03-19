@@ -22,29 +22,35 @@ footnoteReturnLinkContents = "1111111111111111"
     gplus = "https://plus.google.com/+NateFinch"
     disqus = "npfio"
 [[menu.main]]
-    # 页面左侧的目录
+    name = "python"
+    url = "/python"
+[[menu.main]]
     name = "twisted"
     url = "/twisted"
 [[menu.main]]
-    # 页面左侧的目录
     name = "hugo"
     url = "/hugo"
 [[menu.main]]
-    # 页面左侧的目录
     name = "Markdown"
     url = "/markdown"
-# [[menu.social]]
-#   pre = "<i class='fa fa-link'></i>"
-#   url = "http://blog.csdn.net/cuick2013"
-#   identifier = "c_csdn"
+[[menu.main]]
+    name = "Django"
+    url = "/django"
+[[menu.main]]
+    name = "随笔"
+    url = "/notes"
+[[menu.social]]
+    pre = "<i class='fa fa-link'></i>"
+    url = "http://blog.csdn.net/cuick2013"
+    identifier = "c_csdn"
 [[menu.social]]
     pre = "<i class='fa fa-github'></i>"
     url = "http://github.com/cuick"
     identifier = "b_github"
-# [[menu.social]]
-#    pre = "<i class='fa fa-weibo'></i>"
-#    url = "http://weibo.com/zxzxck/"
-#    identifier = "a_weibo"
+[[menu.social]]
+    pre = "<i class='fa fa-weibo'></i>"
+    url = "http://weibo.com/zxzxck/"
+    identifier = "a_weibo"
 # [[menu.social]]
 # pre = "<i class='fa fa-google'></i>"
 # url = "https://plus.google.com/+NateFinch"
@@ -52,8 +58,8 @@ footnoteReturnLinkContents = "1111111111111111"
 
 [[menu.footer]]
     # 页脚
-    name = "notes"
-    url = "/notes"
+    name = "Powered by Hugo with hugo-redlounge"
+    url = "/footer"
 
 [taxonomies]
     category = "categories"
