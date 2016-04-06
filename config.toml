@@ -37,8 +37,24 @@ footnoteReturnLinkContents = "1111111111111111"
     name = "Django"
     url = "/django"
 [[menu.main]]
+    name = "linux"
+    url = "/linux"
+[[menu.main]]
+    name = "redis"
+    url = "/redis"
+[[menu.main]]
+    name = "vim"
+    url = "/vim"
+[[menu.main]]
+    name = "windows"
+    url = "/windows"
+[[menu.main]]
     name = "随笔"
     url = "/notes"
+[[menu.main]]
+    name = "zsh"
+    url = "/zsh"
+
 [[menu.social]]
     pre = "<i class='fa fa-link'></i>"
     url = "http://blog.csdn.net/cuick2013"

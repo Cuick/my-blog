@@ -9,10 +9,9 @@ categories = [
 
 +++
 
-    # -*- coding: utf-8 -*-
-    """
-    @ 计算自然周第一天、自然月第一天和每天的凌晨时间戳
-    """
+计算自然周第一天、自然月第一天和每天的凌晨时间戳
+<!--more-->
+
     import time
 
     def get_day_begin(ts = time.time(),N = 0):
