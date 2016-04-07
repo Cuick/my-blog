@@ -1,6 +1,6 @@
 +++
 date = "2016-03-20T17:57:49+08:00"
-title = "字典删除元素"
+title = "python基础-字典删除元素"
 
 tags = [ "python", "字典"]
 categories = [
