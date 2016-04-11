@@ -8,6 +8,7 @@ categories = [
 ]
 
 +++
+<!--more-->
 
 闭包
 
@@ -21,4 +22,3 @@ categories = [
 
     print p(10)
     print q(10)
-<!--more-->

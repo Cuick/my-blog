@@ -5,6 +5,7 @@ nodate = true
 nopaging = true
 
 +++
+<!--more-->
 
 ## Powered by [Hugo](https://github.com/spf13/hugo) with [hugo-redlounge](https://github.com/tmaiaroto/hugo-redlounge)
 ## 有问题请微博私信
