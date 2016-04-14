@@ -48,9 +48,9 @@ footnoteReturnLinkContents = "1111111111111111"
 [[menu.main]]
     name = "windows"
     url = "/windows"
-[[menu.main]]
-    name = "随笔"
-    url = "/notes"
+# [[menu.main]]
+#     name = "随笔"
+#     url = "/notes"
 [[menu.main]]
     name = "zsh"
     url = "/zsh"

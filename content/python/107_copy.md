@@ -8,7 +8,6 @@ categories = [
 ]
 
 +++
-<!--more-->
 
 ## 赋值 引用 浅复制 深复制
 
@@ -18,6 +17,7 @@ categories = [
         >>> values[1] = values
         >>> values
         [0, [...], 2]
+<!--more-->
 
     并非我预想de:
 

@@ -8,13 +8,13 @@ categories = [
 ]
 
 +++
-<!--more-->
 
-# Python 字典删除元素clear、pop、popitem
+## Python 字典删除元素clear、pop、popitem
 
 ### clear()
 
 clear()方法是用来清除字典中的所有数据，因为是原地操作，所以返回None（也可以理解为没有返回值）
+<!--more-->
 
     >>> x['name'] = 'lili'
     >>> x['age'] = 20
