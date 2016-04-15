@@ -8,7 +8,6 @@ categories = [
 ]
 
 +++
-<!--more-->
 
 计算自然周第一天、自然月第一天和每天的凌晨时间戳
 
@@ -18,6 +17,7 @@ categories = [
     """
     N为0时获取时间戳ts当天的起始时间戳，N为负数时前数N天，N为正数是后数N天
     """
+<!--more-->
      return int(time.mktime(time.strptime(time.strftime('%Y-%m-%d',time.localtime(ts)),'%Y-%m-%d'))) + 86400*N
 
     def get_week_begin(ts = time.time(),N = 0):
