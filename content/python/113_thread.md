@@ -1,0 +1,413 @@
++++
+date = "2016-04-15T15:07:49+08:00"
+title = "python基础-进程和线程"
+
+tags = [ "python", "进程", "线程"]
+categories = [
+  "python"
+]
+
++++
+
+### 访问限制
+
+在Python中，变量名类似`__xxx__`的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是private变量，所以，不能用`__name__`、`__score__`这样的变量名
+<!--more-->
+
+如果要让类内部属性不被外部访问，可以把属性的名称前加上两个下划线`__`，在Python中，实例的变量名如果以`__`开头，就变成了一个私有变量（private）
+
+双下划线开头的实例变量是不是一定不能从外部访问呢？其实也不是。不能直接访问`__name`是因为Python解释器对外把`__name`变量改成了`_Student__name`，所以，仍然可以通过`_Student__name`来访问`__name`变量：
+
+    class Student(object):
+
+    def __init__(self, name, score):
+        self.__name = name
+        self.__score = score
+
+    def print_score(self):
+        print '%s: %s' % (self.__name, self.__score)
+
+    >>> bart._Student__name
+    'Bart Simpson'
+
+但是永远不要这么干
+
+### 获取对象信息
+
+#### type
+
+判断对象类型
+
+所有类型本身的类型就是TypeType
+
+    >>> type(int)==type(str)==types.TypeType
+    True
+
+#### isinstance
+
+判断 一个对象是否是某种类型
+
+    >>> a = Animal()
+    >>> d = Dog()
+    >>> h = Husky()
+
+    >>> isinstance(h, Husky)
+    True
+
+子类对象是是父类的类型
+
+父类对象 不是 子类 的类型
+
+能用type()判断的基本类型也可以用isinstance()判断
+
+还可以判断一个变量是否是某些类型中的一种:
+
+    >>> isinstance('a', (str, unicode))
+    True
+    >>> isinstance(u'a', (str, unicode))
+    True
+
+#### dir()
+
+获得一个对象的所有属性和方法
+
+    >>> dir('ABC')
+    ['__add__', '__class__', '__contains__', '__delattr__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__getslice__', '__gt__', '__hash__', '__init__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '_formatter_field_name_split', '_formatter_parser', 'capitalize', 'center', 'count', 'decode', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'index', 'isalnum', 'isalpha', 'isdigit', 'islower', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+
+配合getattr()、setattr()以及hasattr()，我们可以直接操作一个对象的状态
+
+    >>> class MyObject(object):
+    ...     def __init__(self):
+    ...         self.x = 9
+    ...     def power(self):
+    ...         return self.x * self.x
+    ...
+    >>> obj = MyObject()
+
+    >>> hasattr(obj, 'x') # 有属性'x'吗？
+    True
+    >>> obj.x
+    9
+    >>> hasattr(obj, 'y') # 有属性'y'吗？
+    False
+    >>> setattr(obj, 'y', 19) # 设置一个属性'y'
+    >>> hasattr(obj, 'y') # 有属性'y'吗？
+    True
+    >>> getattr(obj, 'y') # 获取属性'y'
+    19
+    >>> obj.y # 获取属性'y'
+    19
+
+如果试图获取不存在的属性，会抛出AttributeError的错误：
+
+    >>> getattr(obj, 'z') # 获取属性'z'
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    AttributeError: 'MyObject' object has no attribute 'z'
+
+可以传入一个default参数，如果属性不存在，就返回默认值：
+
+    >>> getattr(obj, 'z', 404) # 获取属性'z'，如果不存在，返回默认值404
+    404
+
+也可以获得对象的方法：
+
+    >>> hasattr(obj, 'power') # 有属性'power'吗？
+    True
+    >>> getattr(obj, 'power') # 获取属性'power'
+    <bound method MyObject.power of <__main__.MyObject object at 0x108ca35d0>>
+    >>> fn = getattr(obj, 'power') # 获取属性'power'并赋值到变量fn
+    >>> fn # fn指向obj.power
+    <bound method MyObject.power of <__main__.MyObject object at 0x108ca35d0>>
+    >>> fn() # 调用fn()与调用obj.power()是一样的
+    81
+
+### 动态添加属性
+
+定义class
+
+    >>> class Student(object):
+    ...     pass
+    ...
+
+绑定属性
+
+    >>> s = Student()
+    >>> s.name = 'Michael' # 动态给实例绑定一个属性
+    >>> print s.name
+    Michael
+
+给一个实例绑定方法
+
+    >>> def set_age(self, age): # 定义一个函数作为实例方法
+    ...     self.age = age
+    ...
+    >>> from types import MethodType
+    >>> s.set_age = MethodType(set_age, s, Student) # 给实例绑定一个方法
+    >>> s.set_age(25) # 调用实例方法
+    >>> s.age # 测试结果
+    25
+
+给class绑定方法
+
+    >>> def set_score(self, score):
+    ...     self.score = score
+    ...
+    >>> Student.set_score = MethodType(set_score, None, Student)
+
+
+给实例绑定方法后其他的实例不能使用 
+给类绑定方法后所有的实例都可以使用
+
+动态绑定允许我们在程序运行的过程中动态给class加上功能，这在静态语言中很难实现
+
+#### `__slots__`
+
+Python允许在定义class的时候，定义一个特殊的`__slots__`变量，来限制该class能添加的属性
+
+    >>> class Student(object):
+    ...     __slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
+    ...
+
+    >>> s = Student() # 创建新的实例
+    >>> s.name = 'Michael' # 绑定属性'name'
+    >>> s.age = 25 # 绑定属性'age'
+    >>> s.score = 99 # 绑定属性'score'
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    AttributeError: 'Student' object has no attribute 'score'
+
+`__slots__`定义的属性仅对当前类起作用，对继承的子类是不起作用的
+
+非在子类中也定义`__slots__`，这样，子类实例允许定义的属性就是自身的`__slots__`加上父类的`__slots__`。
+
+#### @property
+
+Python内置的@property装饰器负责把一个方法变成属性调用
+
+### 多重继承
+
+在设计类的时候，我们优先考虑通过多重继承来组合多个MixIn的功能，而不是设计多层次的复杂的继承关系。
+
+    class Dog(Mammal, RunnableMixIn, CarnivorousMixIn):
+        pass
+
+### 定制类
+
+类似`__slots__`这种形如`__xxx__`的变量或者函数名就要注意，这些在Python中是有特殊用途的 
+thon的class中还有许多这样有特殊用途的函数，可以帮助我们定制类
+
+#### `__str__()` `__repr__()`
+
+    >>> class Student(object):
+    ...     def __init__(self, name):
+    ...         self.name = name
+    ...
+    >>> print(Student('Michael'))
+    <__main__.Student object at 0x109afb190>
+
+使用`__str__`:
+
+    >>> class Student(object):
+    ...     def __init__(self, name):
+    ...         self.name = name
+    ...     def __str__(self):
+    ...         return 'Student object (name: %s)' % self.name
+    ...
+    >>> print(Student('Michael'))
+    Student object (name: Michael)
+
+直接敲变量不用print，打印出来的实例还是和未使用`__str__`一样 
+使用`__repr__`后 ，直接返回 设置的内容
+
+两者的区别是`__str__`()返回用户看到的字符串，而`__repr__()`返回程序开发者看到的字符串，也就是说，`__repr__()`是为调试服务的
+
+#### `__iter__`
+
+将对象实例变为迭代对象
+
+Python的for循环就会不断调用该迭代对象的`__next__()`方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环
+
+    class Fib(object):
+        def __init__(self):
+            self.a, self.b = 0, 1 # 初始化两个计数器a，b
+
+        def __iter__(self):
+            return self # 实例本身就是迭代对象，故返回自己
+
+        def __next__(self):
+            self.a, self.b = self.b, self.a + self.b # 计算下一个值
+            if self.a > 100000: # 退出循环的条件
+                raise StopIteration();
+            return self.a # 返回下一个值
+
+    >>> for n in Fib():
+    ...     print(n)
+    ...
+    1
+    1
+    2
+    3
+
+#### `__getitem__`
+
+让对象可以和list一样去取值
+
+    class Fib(object):
+        def __getitem__(self, n):
+            a, b = 1, 1
+            for x in range(n):
+                a, b = b, a + b
+            return a
+
+    >>> f = Fib()
+    >>> f[0]
+    1
+    >>> f[1]
+    1
+    >>> f[2]
+    2
+
+加入一个判断，让我们的对象实现切片的用法
+
+    class Fib(object):
+        def __getitem__(self, n):
+            if isinstance(n, int): # n是索引
+                a, b = 1, 1
+                for x in range(n):
+                    a, b = b, a + b
+                return a
+            if isinstance(n, slice): # n是切片
+                start = n.start
+                stop = n.stop
+                if start is None:
+                    start = 0
+                a, b = 1, 1
+                L = []
+                for x in range(stop):
+                    if x >= start:
+                        L.append(a)
+                    a, b = b, a + b
+                return L
+
+    >>> f = Fib()
+    >>> f[0:5]
+    [1, 1, 2, 3, 5]
+
+另外 还可以结合`__setitem__()`方法、`__delitem__()`方法 等 去实现 dict一样的用法。
+
+我们自己定义的类表现得和Python自带的list、tuple、dict没什么区别，这完全归功于动态语言的“鸭子类型”，不需要强制继承某个接口
+
+鸭子类型： 
+一个对象有效的语义，不是由继承自特定的类或实现特定的接口，而是由当前方法和属性的集合决定。 
+“当看到一只鸟走起来像鸭子、游泳起来像鸭子、叫起来也像鸭子，那么这只鸟就可以被称为鸭子。”
+
+#### `__getattr__`
+
+    class Student(object):
+
+        def __init__(self):
+            self.name = 'Michael'
+
+        def __getattr__(self, attr):
+            if attr=='score':
+                return 99
+
+当调用不存在的属性时，比如score，Python解释器会试图调用`__getattr__`(self, 'score')来尝试获得属性，这样，我们就有机会返回score的值
+也可以返回函数
+
+只有在没有找到属性的情况下，才调用`__getattr__`
+
+属性如果在getattr里不存在，默认返回是None，而不是抛出异常,如果要实现，需要自己抛出
+
+#### `__call__`
+
+实现这个函数可以通过直接调用对象来调用
+
+    class Student(object):
+        def __init__(self, name):
+            self.name = name
+
+        def __call__(self):
+            print('My name is %s.' % self.name)
+
+### 枚举类
+
+定义常量时，通常用大写变量整数来定义
+
+更好的方法是用枚举类型 Enum
+
+    from enum import Enum
+    Month = Enum('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
+
+更精确地控制枚举类型，可以从Enum派生出自定义类：
+
+    from enum import Enum, unique
+    @unique
+    class Weekday(Enum):
+        Sun = 0 # Sun的value被设定为0
+        Mon = 1
+        Tue = 2
+        Wed = 3
+        Thu = 4
+        Fri = 5
+        Sat = 6
+
+访问方式：
+
+    >>> day1 = Weekday.Mon
+    >>> print(day1)
+    Weekday.Mon
+    >>> print(Weekday.Tue)
+    Weekday.Tue
+    >>> print(Weekday['Tue'])
+    Weekday.Tue
+    >>> print(Weekday.Tue.value)
+    2
+    >>> print(day1 == Weekday.Mon)
+    True
+    >>> print(day1 == Weekday.Tue)
+    False
+    >>> print(Weekday(1))
+    Weekday.Mon
+    >>> print(day1 == Weekday(1))
+    True
+
+
+* Enum可以把一组相关常量定义在一个class中，且class不可变，而且成员可以直接比较。
+* `@unique`装饰器可以帮助我们检查保证没有重复值。
+* 既可以用成员名称引用枚举常量，又可以直接根据value的值获得枚举常量。
+
+
+### 元类
+
+#### type
+
+type()函数既可以返回一个对象的类型，又可以创建出新的类型
+
+    >>> def fn(self, name='world'): # 先定义函数
+    ...     print('Hello, %s.' % name)
+    ...
+    >>> Hello = type('Hello', (object,), dict(hello=fn)) # 创建Hello class
+    >>> h = Hello()
+    >>> h.hello()
+    Hello, world.
+    >>> print(type(Hello))
+    <class 'type'>
+    >>> print(type(h))
+    <class '__main__.Hello'>
+
+三个参数：
+
+1. class的名称；
+2. 继承的父类集合，注意Python支持多重继承，如果只有一个父类，别忘了tuple的单元素写法；
+3. class的方法名称与函数绑定，这里我们把函数fn绑定到方法名hello上。
+
+动态语言本身支持运行期动态创建类，这和静态语言有非常大的不同
+
+#### metaclass
+
+http://blog.jobbole.com/21351/
+
+。。。
+
